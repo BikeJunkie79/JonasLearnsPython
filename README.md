@@ -81,12 +81,21 @@ Eine Ausgabe soll ähnlich dieser sein:
 [0.0, 3.14, 3.14, 6.28, 9.42, 15.7, 25.12, 40.82, 65.94, 106.76, 172.7, 279.46, 452.16]
 ```
 ### Meine Notiz
-Debug: 
-F5 - starten
-F9 - Breakpoint sezten
-F10 - durchlaufen
-F11 - In Funktion springen
 
+|Debug|-
+|---|---|
+|F5|Starten|
+|F9|Breakpoint|
+|F10|durchlaufen|
+|F11|In Funktion springen|
+
+|Befehle| -
+|---|---|
+|Print|Schreiben|
+|def|Definieren/unterbefehle|
+|append|Listen füllen/anhängen|
+|for|for schleife|
+|return|sendet Wert zurück|
 ### Feedback
 
 ## Aufgabe 2

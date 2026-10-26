@@ -78,3 +78,5 @@ y_i = f_2(x_i)
 y_i = f_3(x_i) 
 y_i = f_4(x_i) 
 y_i = f_5(b_i)
+
+

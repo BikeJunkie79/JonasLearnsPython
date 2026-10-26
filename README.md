@@ -125,7 +125,8 @@ Du hast erfolgreich ein git clone und ein Commit/ push gemacht. Kannst du die Ko
 - a) Kopiere die Datei `aufgabe_1.py` und nenne die Kopie `aufgabe_3.py`.
 - b) Ändere die Kopie so, dass sie anstelle einer Wertetabelle ein Diagramm erzeugt, welches alle drei Graphen $f_i(x)$ mit $i = {1, 2, 3}$ darstellt.
 
-Nutze dazu das Modul `matplotlib`. Einen Einstieg dazu bekommst Du im [Getting Started](https://Jonas, das sieht schon sehr gut aus. Alle Funktionen sind definiert und die Ergebnisse werden geordnet ausgegeben. Prima.org/stable/users/getting_started/).
+Nutze dazu das Modul `matplotlib`. Einen Einstieg dazu bekommst Du im [Getting Started](https://matplotlib.org/stable/users/getting_started/) 
+Jonas, das sieht schon sehr gut aus. Alle Funktionen sind definiert und die Ergebnisse werden geordnet ausgegeben. Prima.org/stable/users/getting_started/).
 
 Dazu muss du das Module matplotlib holen. In der Console den befehl
 

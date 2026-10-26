@@ -98,6 +98,8 @@ Eine Ausgabe soll ähnlich dieser sein:
 |return|sendet Wert zurück|
 ### Feedback
 
+Jonas, das sieht schon sehr gut aus. Alle Funktionen sind definiert und die Ergebnisse werden geordnet ausgegeben. Prima
+
 ## Aufgabe 2
 
 Neben Python gehört heutzutage "git" und "GitHub" zu den wichtigsten Werkzeugen eines Software Entwicklers.
@@ -113,5 +115,37 @@ Dann werde ich Dir Schreibzugriff auf dieses Repository geben und auf Dich zukom
 
 ### Feedback
 
+Du hast erfolgreich ein git clone und ein Commit/ push gemacht. Kannst du die Konsolen Befehle hierzu noch angeben?
 
+
+
+
+## Aufgabe 3
+
+- a) Kopiere die Datei `aufgabe_1.py` und nenne die Kopie `aufgabe_3.py`.
+- b) Ändere die Kopie so, dass sie anstelle einer Wertetabelle ein Diagramm erzeugt, welches alle drei Graphen $f_i(x)$ mit $i = {1, 2, 3}$ darstellt.
+
+Nutze dazu das Modul `matplotlib`. Einen Einstieg dazu bekommst Du im [Getting Started](https://Jonas, das sieht schon sehr gut aus. Alle Funktionen sind definiert und die Ergebnisse werden geordnet ausgegeben. Prima.org/stable/users/getting_started/).
+
+Dazu muss du das Module matplotlib holen. In der Console den befehl
+
+```
+pip install matplotlib
+```
+
+Dann das Module über ein import einbinden. Siehe Link oben.
+
+```import matplotlib.pyplot as plt```
+
+
+Bitte mache folgende Erweiterung:
+
+- c) Das Fenster soll ein weiteres Diagramm haben, also insgesamt zwei. Das neue Diagramm soll die Graphen der selben Funktionen zeigen, jedoch als Datenpunkte und nicht als durchgezogene Linien. Weiterhin soll das Diagramm Gitternetzlinien haben, damit man sich besser orientieren kann. Die Achsen sollen durch den Punkt $(0, 0)$ gehen, also das typischen Achsenkreuz, wie wir es aus der Schule kennen. 
+
+
+### Deine Lösung:
+
+
+
+### Feedback
 

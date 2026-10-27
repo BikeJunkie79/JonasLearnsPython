@@ -157,9 +157,25 @@ Installiere eine eigene virtuelle Umgebung (.venv) in deinem Projekt. Dazu wird 
 
 Commands:
 
+uv über scoop installieren (einmalig):
+
 ```
-uv sync     
+scoop install uv
 ```
+
+Im Projektordner die Umgebung bauen:
+```
+cd C:\Workspace\JonasLearnsPython
+uv python install 3.13     # holt ein eigenes Python 3.13 (optional, siehe unten)
+uv sync                    # legt .venv an UND installiert matplotlib + numpy
+```
+
+Die .venv als Standard Intergreter setzten: In settings.json
+```
+    "python.defaultInterpreterPath": "${workspaceFolder}/.venv/Scripts/python.exe",
+```
+
+Dann VS Code neu starten oder F1 + Reload Window eingeben. Prüfen ob der korrekte Interpreter gesetzt ist.
 
 ## Aufgabe 5
 

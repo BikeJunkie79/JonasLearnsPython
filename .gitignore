@@ -1,0 +1,7 @@
+# Virtuelle Umgebung - gehoert NICHT ins Repository,
+# die wird bei jedem mit "uv sync" neu erzeugt
+.venv/
+
+# Python
+__pycache__/
+*.pyc

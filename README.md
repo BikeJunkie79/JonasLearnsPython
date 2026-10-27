@@ -150,3 +150,63 @@ Bitte mache folgende Erweiterung:
 
 ### Feedback
 
+
+## Aufgabe 4
+
+Installiere eine eigene virtuelle Umgebung (.venv) in deinem Projekt. Dazu wird scoop Verwendet. Ein großer Vorteil davon ist, das dein python mit im Projekt liegt, z.B. derren Version dort festgehalten sind und man sehr schnell diese venv wieder herstellen kann.
+
+Commands:
+
+```
+uv sync     
+```
+
+## Aufgabe 5
+
+In Aufgabe 3 hast Du Deine Funktionen gezeichnet. Ein Diagramm ist aber erst dann wirklich gut, wenn ein anderer Mensch es verstehen kann, **ohne** dass Du daneben stehst und es erklärst. Genau das machen wir jetzt: aus dem Diagramm wird eine fertige Abbildung, so wie Du sie in einem Physik-Protokoll oder einem Buch finden würdest.
+
+- a) Kopiere die Datei `Aufgabe_3.py` und nenne die Kopie `Aufgabe_5.py`.
+
+Erweitere die Kopie dann Schritt für Schritt:
+
+- b) **Beschriftung:** Gib dem Diagramm eine Überschrift und beschrifte beide Achsen (`x` und `y`).
+- c) **Legende:** Zeichne mehrere Funktionen in *ein* Diagramm. Jede Kurve bekommt beim Zeichnen einen Namen, und das Diagramm bekommt eine Legende, damit man die Kurven unterscheiden kann.
+- d) **Aussehen:** Gib jeder Kurve eine eigene Farbe und einen eigenen Linienstil (z.B. durchgezogen, gestrichelt, gepunktet) und mache die Linien etwas dicker.
+- e) **Ausschnitt:** Lege selbst fest, welcher Bereich der x- und y-Achse zu sehen ist. Probiere aus, was passiert, wenn Du den Bereich der y-Achse auf $-20$ bis $20$ begrenzt, obwohl $f_3(x) = x^2$ bei $x = 10$ schon den Wert $100$ hat.
+- f) **Besonderen Punkt markieren:** Suche Dir einen interessanten Punkt aus (z.B. den Schnittpunkt zweier Graphen oder den tiefsten Punkt der Parabel), zeichne dort einen dicken Punkt hin und schreibe mit einem Pfeil einen kurzen Text daneben.
+- g) **Speichern:** Speichere das fertige Diagramm als Bilddatei `aufgabe_5.png` in Deinem Projektordner — und zwar aus dem Programm heraus, nicht mit der Maus über den Speichern-Knopf im Fenster.
+
+### Hinweise
+
+Alle neuen Befehle gehören zum `ax`-Objekt, das Du schon aus Aufgabe 3 kennst (`fig, ax = plt.subplots()`). Hier die Stichworte, den Rest findest Du in der Dokumentation:
+
+```python
+ax.plot(x, y, label="f_1(x) = x", color="blue", linestyle="--", linewidth=2)
+ax.set_title("...")
+ax.set_xlabel("...")
+ax.set_ylabel("...")
+ax.set_xlim(...)
+ax.set_ylim(...)
+ax.legend()
+ax.annotate("...", xy=(0, 0), xytext=(3, 10), arrowprops={"arrowstyle": "->"})
+
+fig.savefig("aufgabe_5.png", dpi=150)
+```
+
+Nachschlagen kannst Du das hier:
+
+- [Beschriftungen und Legende](https://matplotlib.org/stable/users/explain/quick_start.html#labelling-plots)
+- [Linienstile und Farben](https://matplotlib.org/stable/gallery/lines_bars_and_markers/linestyles.html)
+- [Text und Pfeile (annotate)](https://matplotlib.org/stable/users/explain/text/annotations.html)
+- [Abbildung speichern](https://matplotlib.org/stable/api/figure_api.html#matplotlib.figure.Figure.savefig)
+
+**Wichtig:** `fig.savefig(...)` muss **vor** `plt.show()` stehen. Überlege Dir, woran das liegen könnte — das ist eine typische Stolperfalle.
+
+**Tipp zur Reihenfolge:** Mache immer nur *eine* Änderung und starte das Programm danach direkt neu (F5). So siehst Du sofort, was der neue Befehl bewirkt, und weißt bei einem Fehler genau, welche Zeile schuld ist.
+
+### Deine Lösung:
+
+
+
+### Feedback
+

@@ -318,3 +318,8 @@ Wenn Du das Diagrammfenster offen hast, kannst Du die Wolke **mit der Maus drehe
 
 ### Feedback
 
+
+## Aufgabe 7
+
+Starte das SoftwareCenter auf deinem PC und installiere MashLab - dies ist ein Programm für die Darstellung von 3D Daten. Du kannst einfach die obj Dateien hineinziehen und Anzeigen und Betrachten. Schau Dir mal die Option an - vielleicht ist da etwas gutes dabei, was du auch in deinem matplotlib Viewer einbauen könntest.
+

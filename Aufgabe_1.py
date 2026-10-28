@@ -40,7 +40,7 @@ def f_3(x_i: float) -> float:
     for x in x_i:
         y = squared = x ** 2
         y_i.append(y)
-    print ("3. Funktion Y = x^2")
+    print ("3. Funktion Y = x^2+4")
     print(y_i)
     return y_i
 

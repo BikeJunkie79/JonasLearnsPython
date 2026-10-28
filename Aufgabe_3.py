@@ -21,11 +21,13 @@ x=np.linspace(-20, 20, 41)
 y=A1.f_5(x)
 fig = plt.figure
 fig,ax = plt.subplots(figsize=(10, 10), layout='constrained')
+
 ax.plot(x,y, color= "red", linewidth =3, label = "linear")
 y=A1.f_3(x)
 ax.plot(x,y, color= "lime", linewidth =2, label = "parabel")
 y=A1.f_4(x)
 ax.plot(x, y, color = "black", linewidth = 2, linestyle = '--', label= "linear")
+
 ax.set_title("Three functions")
 ax.yaxis
 ax.xaxis

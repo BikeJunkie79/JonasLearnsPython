@@ -1,0 +1,33 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
+
+fig = plt.figure()
+ax = fig.add_subplot(projection='3d')
+
+x= []
+y= []
+X, Y = np.meshgrid(x,y)
+z= []
+Z= X**2 + Y**2
+
+
+
+with open("Data/tiergesicht.obj")as datei:
+    for zeile in datei:
+        if zeile.startswith("v"):
+            teile = zeile.split()
+            x.append(float(teile[1]))
+            y.append(float(teile[2]))
+            z.append(float(teile[3]))
+
+print("Punkte eingelesen:", len(x))
+ax.scatter(x, y, z, s=1)
+ax.yaxis
+ax.set_xlabel ("X Koordinate", fontsize= 15, color= "darkblue")
+ax.xaxis
+ax.set_ylabel ("Y Koordinate", fontsize= 15, color= "darkblue")
+ax.zaxis
+ax.set_zlabel ("Z Koordinate", fontsize= 15, color= "darkblue")
+ax.plot_surface(X, Y, Z, cmap= 'viridis')
+plt.show()

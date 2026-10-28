@@ -1,0 +1,36 @@
+body {
+    background-color: #ffffff !important;
+    color: #24292f !important;
+}
+
+a {
+    color: #0969da !important;
+}
+
+pre,
+code {
+    background-color: #f6f8fa !important;
+    color: #24292f !important;
+}
+
+blockquote {
+    color: #57606a !important;
+    border-left-color: #d0d7de !important;
+}
+
+table tr {
+    background-color: #ffffff !important;
+}
+
+table tr:nth-child(2n) {
+    background-color: #f6f8fa !important;
+}
+
+table th,
+table td {
+    border-color: #d0d7de !important;
+}
+
+hr {
+    background-color: #d8dee4 !important;
+}

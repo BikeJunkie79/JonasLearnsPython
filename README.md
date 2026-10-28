@@ -157,9 +157,25 @@ Installiere eine eigene virtuelle Umgebung (.venv) in deinem Projekt. Dazu wird 
 
 Commands:
 
+uv über scoop installieren (einmalig):
+
 ```
-uv sync     
+scoop install uv
 ```
+
+Im Projektordner die Umgebung bauen:
+```
+cd C:\Workspace\JonasLearnsPython
+uv python install 3.13     # holt ein eigenes Python 3.13 (optional, siehe unten)
+uv sync                    # legt .venv an UND installiert matplotlib + numpy
+```
+
+Die .venv als Standard Intergreter setzten: In settings.json
+```
+    "python.defaultInterpreterPath": "${workspaceFolder}/.venv/Scripts/python.exe",
+```
+
+Dann VS Code neu starten oder F1 + Reload Window eingeben. Prüfen ob der korrekte Interpreter gesetzt ist.
 
 ## Aufgabe 5
 
@@ -203,6 +219,98 @@ Nachschlagen kannst Du das hier:
 **Wichtig:** `fig.savefig(...)` muss **vor** `plt.show()` stehen. Überlege Dir, woran das liegen könnte — das ist eine typische Stolperfalle.
 
 **Tipp zur Reihenfolge:** Mache immer nur *eine* Änderung und starte das Programm danach direkt neu (F5). So siehst Du sofort, was der neue Befehl bewirkt, und weißt bei einem Fehler genau, welche Zeile schuld ist.
+
+### Deine Lösung:
+
+
+
+### Feedback
+
+
+## Aufgabe 6
+
+Bisher waren Deine Diagramme flach — zwei Achsen, $x$ und $y$. Jetzt kommt eine dritte Achse dazu. Das ist genau die Welt, in der auch die Schweißnaht-Scans später leben: ein Scanner liefert keine Kurve, sondern eine **Punktewolke**, also tausende Messpunkte mit je einer $x$-, $y$- und $z$-Koordinate.
+
+Damit Du das üben kannst, liegt im Projekt die Datei `tiergesicht.obj`. Was da drin steckt, findest Du selbst heraus — schau sie Dir ruhig erst mal in VS Code an.
+
+- a) Lege eine neue Datei `Aufgabe_6.py` an.
+
+### Teil 1: Eine Fläche im Raum
+
+Zum Aufwärmen zeichnest Du eine mathematische Funktion mit *zwei* Eingaben: $z = f(x, y)$. Statt einer Kurve kommt dabei eine gewölbte Fläche heraus.
+
+- b) Erzeuge ein 3D-Diagramm und zeichne die Funktion $z = x^2 + y^2$ als Fläche. Das ist ein "Paraboloid" — eine Parabel, die um die $z$-Achse gedreht wurde.
+- c) Probiere danach eine zweite Funktion aus, z.B. $z = \sin(x) \cdot \cos(y)$. Die sieht aus wie ein Eierkarton.
+
+Dafür brauchst Du zwei neue Dinge. Erstens eine 3D-Achse:
+
+```python
+fig = plt.figure()
+ax = fig.add_subplot(projection="3d")
+```
+
+Zweitens ein **Gitter** aus x- und y-Werten. `np.meshgrid` macht aus zwei Listen ein Raster, das jeden x-Wert mit jedem y-Wert kombiniert:
+
+```python
+x = np.linspace(-5, 5, 60)
+y = np.linspace(-5, 5, 60)
+X, Y = np.meshgrid(x, y)
+Z = X**2 + Y**2
+
+ax.plot_surface(X, Y, Z, cmap="viridis")
+```
+
+> **Denkaufgabe:** Lass Dir `X` und `Y` einmal mit `print` ausgeben. Warum sind das keine Listen mehr, sondern Tabellen? Und warum braucht man das, um eine Fläche zu zeichnen?
+
+### Teil 2: Die Punktewolke
+
+- d) Lies die Datei `tiergesicht.obj` in Deinem Programm ein. Jede Zeile, die mit `v ` beginnt (*v* wie *vertex*, englisch für Eckpunkt), enthält einen Punkt mit drei Zahlen. Zeilen, die mit `#` oder `o` beginnen, sind Kommentare bzw. ein Name — die überspringst Du.
+- e) Sammle die Zahlen in drei Listen `x`, `y` und `z`.
+- f) Zeichne alle Punkte mit `ax.scatter(x, y, z)` in ein 3D-Diagramm. Wähle eine kleine Punktgröße, sonst klebt alles zusammen: `s=1`.
+- g) Beschrifte die drei Achsen und gib dem Diagramm einen Titel.
+- h) Färbe die Punkte nach ihrer Höhe ein: `c=z, cmap="viridis"`. Probiere auch `c=y` aus — was wird dann sichtbar, was vorher nicht zu sehen war?
+
+Eine Datei liest man in Python so:
+
+```python
+x = []
+y = []
+z = []
+
+with open("tiergesicht.obj") as datei:
+    for zeile in datei:
+        if zeile.startswith("v "):
+            teile = zeile.split()      # zerlegt "v 1.0 -0.5 0.3" in Einzelteile
+            x.append(float(teile[1]))  # teile[0] ist das "v" selbst
+            y.append(float(teile[2]))
+            z.append(float(teile[3]))
+
+print("Punkte eingelesen:", len(x))
+```
+
+Das `with open(...)` ist neu: es öffnet die Datei und schließt sie hinterher automatisch wieder. `float(...)` wandelt den Text `"1.0"` in eine echte Zahl um — ohne das würdest Du Buchstaben addieren statt Zahlen.
+
+### Teil 3: Richtig hinschauen
+
+Wenn Du das Diagrammfenster offen hast, kannst Du die Wolke **mit der Maus drehen**. Probier das aus, das ist der halbe Spaß an 3D.
+
+- i) Sorge dafür, dass die drei Achsen gleich lang sind, sonst ist das Gesicht verzerrt: `ax.set_box_aspect((1, 1, 1))`.
+- j) Stelle den Startblickwinkel so ein, dass man das Tier von vorne anschaut: `ax.view_init(elev=10, azim=-90)`. Spiele mit beiden Zahlen und finde heraus, was `elev` und was `azim` bedeutet.
+- k) **Welches Tier ist es?** Schreibe Deine Antwort unten bei "Deine Lösung" hin.
+
+### Zum Nachschlagen
+
+- [3D-Diagramme in matplotlib](https://matplotlib.org/stable/users/explain/toolkits/mplot3d.html)
+- [3D-Punktwolke (scatter)](https://matplotlib.org/stable/gallery/mplot3d/scatter3d.html)
+- [3D-Fläche (plot_surface)](https://matplotlib.org/stable/gallery/mplot3d/surface3d.html)
+- [Farbskalen (colormaps)](https://matplotlib.org/stable/users/explain/colors/colormaps.html)
+
+**Tipp:** Fange klein an. Lass Dir erst mit `print(len(x))` zeigen, dass das Einlesen überhaupt geklappt hat, bevor Du ans Zeichnen gehst. Wenn da `0` steht, stimmt etwas mit dem Einlesen nicht — dann hilft Dir kein Diagramm weiter.
+
+### Bonus
+
+- l) Zeichne nur jeden zehnten Punkt (`x[::10]`). Ab wann erkennt man das Tier nicht mehr?
+- m) Zeige die Fläche aus Teil 1 und die Punktewolke aus Teil 2 nebeneinander in **einem** Fenster. Den Befehl dafür kennst Du schon aus Aufgabe 3.
 
 ### Deine Lösung:
 

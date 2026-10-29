@@ -19,7 +19,7 @@ Z= X**2 + Y**2
 
 with open("Data/tiergesicht.obj")as datei:
     for zeile in datei:
-        if zeile.startswith("v"):
+        if zeile.startswith("v "):
             teile = zeile.split()
             x.append(float(teile[1]))
             y.append(float(teile[2]))

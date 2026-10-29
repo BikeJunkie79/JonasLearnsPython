@@ -19,7 +19,7 @@ Z= X**2 + Y**2
 
 with open("Data/skateboard.obj")as datei:
     for zeile in datei:
-        if zeile.startswith("v"):
+        if zeile.startswith("v "):
             teile = zeile.split()
             if float(teile[3]) != -2.0 and float(teile[1]) != -1.0:
                 x.append(float(teile[1]))
@@ -28,9 +28,9 @@ with open("Data/skateboard.obj")as datei:
 
 print("Punkte eingelesen:", len(x))
 # Unterabtastung: Nur jeden 10. Punkt nehmen
-x_downsampled = x[::10]
-y_downsampled = y[::10]
-z_downsampled = z[::10]
+x_downsampled = x[::5]
+y_downsampled = y[::5]
+z_downsampled = z[::5]
 print("Unterabtsatung:", len(x_downsampled))
 ax.scatter(x_downsampled, y_downsampled, z_downsampled, s=1, c=z_downsampled)
 ax.yaxis

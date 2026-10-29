@@ -315,11 +315,41 @@ Wenn Du das Diagrammfenster offen hast, kannst Du die Wolke **mit der Maus drehe
 ### Deine Lösung:
 
 
+```{figure} _figures/Katze.png
+```
 
 ### Feedback
+
+Super! Es ist doch toll, wenn etwas funktioniert.
 
 
 ## Aufgabe 7
 
 Starte das SoftwareCenter auf deinem PC und installiere MashLab - dies ist ein Programm für die Darstellung von 3D Daten. Du kannst einfach die obj Dateien hineinziehen und Anzeigen und Betrachten. Schau Dir mal die Option an - vielleicht ist da etwas gutes dabei, was du auch in deinem matplotlib Viewer einbauen könntest.
 
+### Deine Lösung:
+
+
+
+### Feedback
+
+
+## Aufgabe 8
+
+Lege ein neues python an.
+
+Kannst du probieren auch die selbst gescannten Objekte zu zeichnen. 
+Werden dies gut angezeigt? Ist der Viewer noch bedienbar?
+Was könnte man verbessern?
+
+a) Probiere Punkte welche auf z=0 liegen nicht zu zeichnen
+b) Kannst du eine Unterabtastung einbauen
+c) Mache einen Screenshot vom Ergbniss und lege diesen in _figures ab. Binde diesen unter 'Deine Lösung' ein. Bsp. siehe Katze. Schreibe auf was du verbessert hast. 
+
+### Deine Lösung:
+
+
+
+### Feedback
+
+Zusatz: Mach auch für die anderen Aufgaben Screenshots und integriere sie in diesen Bericht. 

@@ -46,11 +46,3 @@ ax.spines
 
 
 plt.show()
-
-# x=np.linspace(-20, 20, 41)
-# y=A1.f_3(x)
-
-
-# fig, ay = plt.subplots()
-# ay.plot(x,y)
-# plt.show()

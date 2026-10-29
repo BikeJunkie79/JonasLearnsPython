@@ -314,8 +314,9 @@ Wenn Du das Diagrammfenster offen hast, kannst Du die Wolke **mit der Maus drehe
 
 ### Deine Lösung:
 
+Was ist hier los? Wo ist das BIld?
 
-```{figure} _figures/Katze.png
+```{figure}_figures/Katze.png
 ```
 
 ### Feedback

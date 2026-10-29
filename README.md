@@ -80,6 +80,12 @@ Eine Ausgabe soll ähnlich dieser sein:
 5. Funktion Y = b*3.14
 [0.0, 3.14, 3.14, 6.28, 9.42, 15.7, 25.12, 40.82, 65.94, 106.76, 172.7, 279.46, 452.16]
 ```
+![Aufgabe 1](_figures/A1.png)
+
+![](_figures/A1.2.png)
+
+
+
 ### Meine Notiz
 
 |Debug|-
@@ -111,8 +117,6 @@ Hier Deine Aufgabe:
 
 Dann werde ich Dir Schreibzugriff auf dieses Repository geben und auf Dich zukommen, damit wir gemeinsam Deine Lösung von Aufgabe 1 in dieses Repository hinzufügen.
 
-### Deine Lösung:
-
 ### Feedback
 
 Du hast erfolgreich ein git clone und ein Commit/ push gemacht. Kannst du die Konsolen Befehle hierzu noch angeben?
@@ -126,15 +130,14 @@ Du hast erfolgreich ein git clone und ein Commit/ push gemacht. Kannst du die Ko
 - b) Ändere die Kopie so, dass sie anstelle einer Wertetabelle ein Diagramm erzeugt, welches alle drei Graphen $f_i(x)$ mit $i = {1, 2, 3}$ darstellt.
 
 Nutze dazu das Modul `matplotlib`. Einen Einstieg dazu bekommst Du im [Getting Started](https://matplotlib.org/stable/users/getting_started/) 
-Jonas, das sieht schon sehr gut aus. Alle Funktionen sind definiert und die Ergebnisse werden geordnet ausgegeben.
 
-Dazu muss du das Module matplotlib holen. In der Console den befehl
+Dazu muss du das Module matplotlib holen. In der Console den Befehl einbinden:
 
 ```
 pip install matplotlib
 ```
 
-Dann das Module über ein import einbinden. Siehe Link oben.
+Dann das Modul über ein import einbinden. Siehe Link oben.
 
 ```import matplotlib.pyplot as plt```
 
@@ -145,6 +148,10 @@ Bitte mache folgende Erweiterung:
 
 
 ### Deine Lösung:
+
+![Aufgabe 3](_figures/A3.png)   ![Plot mit eingetragenen Graphen](_figures/A3_plot.png)
+
+
 
 
 
@@ -221,11 +228,7 @@ Nachschlagen kannst Du das hier:
 **Tipp zur Reihenfolge:** Mache immer nur *eine* Änderung und starte das Programm danach direkt neu (F5). So siehst Du sofort, was der neue Befehl bewirkt, und weißt bei einem Fehler genau, welche Zeile schuld ist.
 
 ### Deine Lösung:
-
-
-
-### Feedback
-
+![Aufgabe 5](_figures/A5.png)   ![PLot mit Legende, Linienarten und markiertem Punkt](_figures/A5_plot.png)
 
 ## Aufgabe 6
 
@@ -314,10 +317,10 @@ Wenn Du das Diagrammfenster offen hast, kannst Du die Wolke **mit der Maus drehe
 
 ### Deine Lösung:
 
-Was ist hier los? Wo ist das BIld?
+![Aufgabe 6](_figures/A6.png)
+ ![Katze als Punktewolke](_figures/A6_plot.png)
 
-```{figure}_figures/Katze.png
-```
+
 
 ### Feedback
 
@@ -330,7 +333,7 @@ Starte das SoftwareCenter auf deinem PC und installiere MashLab - dies ist ein P
 
 ### Deine Lösung:
 
-
+![meshlab mit 3D Scan](_figures/A7.png)
 
 ### Feedback
 
@@ -349,8 +352,4 @@ c) Mache einen Screenshot vom Ergbniss und lege diesen in _figures ab. Binde die
 
 ### Deine Lösung:
 
-
-
-### Feedback
-
-Zusatz: Mach auch für die anderen Aufgaben Screenshots und integriere sie in diesen Bericht. 
+![Aufgabe 8](_figures/A8.png) ![Plot mit 3D Scan](_figures/A8_plot.png) 

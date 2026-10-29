@@ -5,6 +5,10 @@ import numpy as np
 fig = plt.figure()
 ax = fig.add_subplot(projection='3d')
 
+
+
+
+
 x= []
 y= []
 X, Y = np.meshgrid(x,y)
@@ -22,7 +26,7 @@ with open("Data/tiergesicht.obj")as datei:
             z.append(float(teile[3]))
 
 print("Punkte eingelesen:", len(x))
-ax.scatter(x, y, z, s=1)
+ax.scatter(x, y, z, s=1, c=z)
 ax.yaxis
 ax.set_xlabel ("X Koordinate", fontsize= 15, color= "darkblue")
 ax.xaxis
@@ -30,4 +34,8 @@ ax.set_ylabel ("Y Koordinate", fontsize= 15, color= "darkblue")
 ax.zaxis
 ax.set_zlabel ("Z Koordinate", fontsize= 15, color= "darkblue")
 ax.plot_surface(X, Y, Z, cmap= 'viridis')
+ax.set_box_aspect((1, 1, 1))
+ax.view_init(elev=10, azim= -90)
+
+
 plt.show()

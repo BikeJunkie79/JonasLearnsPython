@@ -337,6 +337,7 @@ Starte das SoftwareCenter auf deinem PC und installiere MashLab - dies ist ein P
 
 ### Feedback
 
+In diesem Program sieht das Skateboard besser aus, da es korrekt i Seitenverhältnis angezeigt wird. Dazu wird eine skalierung verwenden, also eine Rechvorschrift wieviel mm jeder Pixel darstellt.
 
 ## Aufgabe 8
 
@@ -347,9 +348,122 @@ Werden dies gut angezeigt? Ist der Viewer noch bedienbar?
 Was könnte man verbessern?
 
 a) Probiere Punkte welche auf z=0 liegen nicht zu zeichnen
+
 b) Kannst du eine Unterabtastung einbauen
+
 c) Mache einen Screenshot vom Ergbniss und lege diesen in _figures ab. Binde diesen unter 'Deine Lösung' ein. Bsp. siehe Katze. Schreibe auf was du verbessert hast. 
 
 ### Deine Lösung:
 
 ![Aufgabe 8](_figures/A8.png) ![Plot mit 3D Scan](_figures/A8_plot.png) 
+
+### Feedback
+
+Super, du hast die Artefakte ausgeblendet. Das Board ist noch verzerrt, aber mit fanasie erkennen wir es.
+
+
+## Aufgabe 9
+
+Erstelle einen Scan im Bodyloop Scanner und stelle ihn hier mit deinm code dar. Lege dazu ein Aufgabe_9.py an.
+
+
+### Deine Lösung
+
+
+### Feedback
+
+## Aufgabe 10
+
+Bisher hast Du die Scans als Punktewolke im Raum gezeichnet. Jetzt drehen wir den Spieß um und machen daraus ein **Bild** — denn genau so arbeitet die Schweißnahtinspektion wirklich.
+
+Der Trick dahinter: ein Scanner wirft die Punkte nicht wild durcheinander ins Blickfeld. Er fährt Zeile für Zeile über das Objekt, wie ein Drucker. Die Punkte liegen also auf einem **Raster**. Und ein Raster aus Höhenwerten ist nichts anderes als ein Bild — nur dass jeder Bildpunkt keine Farbe speichert, sondern eine **Höhe**. Man nennt das ein *Höhenbild*.
+
+Sobald Du dieses Bild hast, kannst Du damit alles machen, was die Bildverarbeitung kann: die höchste Stelle suchen, Kanten finden, Fehler erkennen.
+
+- a) Lege eine neue Datei `Aufgabe_10.py` an. Nimm `Data/Skateboard.obj` — das kennst Du schon aus Aufgabe 8.
+
+### Teil 1: Aus der Punktewolke ein Bild machen
+
+- b) Lies die Datei ein wie bisher, in die drei Listen `x`, `y` und `z`. **Achtung:** diesmal darfst Du *keine* Punkte wegwerfen — auch nicht die ungültigen. Überlege Dir selbst, warum das Raster kaputtgeht, sobald Du einen einzigen Punkt löschst.
+- c) Finde heraus, wie groß das Raster ist. `np.unique(x)` gibt Dir alle *verschiedenen* x-Werte zurück — die Anzahl davon ist die Zahl der Spalten. Genauso für die Zeilen.
+- d) Prüfe mit `print`, ob `Spalten * Zeilen` genau die Anzahl Deiner Punkte ergibt. Wenn nicht, stimmt etwas mit dem Einlesen nicht, und alles Weitere wäre Unsinn.
+- e) Forme die z-Liste mit `.reshape(...)` in dieses Raster um.
+- f) Die ungültigen Messwerte (`-2.0`) musst Du jetzt **markieren statt löschen**: setze sie auf `np.nan` ("not a number"). matplotlib lässt solche Stellen einfach weiß.
+- g) Zeige das Bild mit `ax.imshow(bild)` an und hänge eine Farbskala daneben, damit man die Höhen ablesen kann.
+
+```python
+spalten = len(np.unique(x))
+zeilen  = len(np.unique(y))
+print(spalten, "x", zeilen, "=", spalten * zeilen, "| Punkte:", len(z))
+
+bild = np.array(z).reshape(spalten, zeilen).T
+bild[bild == -2.0] = np.nan
+
+im = ax.imshow(bild, cmap="viridis")
+fig.colorbar(im, ax=ax, label="Höhe z")
+```
+
+> **Warum das `.T` am Ende?** `.T` heißt "transponieren" und kippt die Tabelle über Eck — aus Zeilen werden Spalten. Lass es einmal weg und schau Dir an, was passiert. Dann weißt Du, wofür es gut ist.
+
+> **Noch eine Eigenheit:** bei `imshow` zeigt die y-Achse nach **unten**. Zeile 0 ist oben. Das ist bei Bildern immer so und verwirrt am Anfang jeden.
+
+### Teil 2: Die Höhe erkennen
+
+- h) Suche die **höchste Stelle** im Bild. Weil im Bild `np.nan`-Werte stehen, brauchst Du `np.nanargmax` — das normale `argmax` kommt mit `nan` nicht klar und liefert Unsinn.
+- i) `np.nanargmax` gibt Dir nur eine einzige Zahl zurück, als wäre das Bild eine lange Kette. Mit `np.unravel_index` rechnest Du sie in Zeile und Spalte um.
+- j) Zeichne an dieser Stelle einen **roten Punkt** ins Bild und schreibe mit einem Pfeil daran, was er bedeutet.
+- k) Mache dasselbe für die tiefste Stelle, in einer anderen Farbe.
+
+```python
+zeile, spalte = np.unravel_index(np.nanargmax(bild), bild.shape)
+print("höchster Punkt:", bild[zeile, spalte])
+
+ax.plot(spalte, zeile, "ro", markersize=10)
+ax.annotate("höchster Punkt", xy=(spalte, zeile), xytext=(spalte + 60, zeile - 30),
+            color="red", arrowprops={"arrowstyle": "->", "color": "red"})
+```
+
+Pass hier auf die **Reihenfolge** auf: `unravel_index` liefert erst die Zeile, dann die Spalte. `ax.plot` will es andersherum — erst waagerecht, dann senkrecht. Wenn Dein Punkt an einer völlig falschen Stelle landet, ist fast immer das die Ursache.
+
+### Teil 3: Ein Schnitt durch das Objekt
+
+Ein Höhenbild von oben verrät Dir nicht, wie steil etwas ist. Dafür schneidet man das Objekt auf und schaut sich das Profil an — wie bei einer Landkarte mit Höhenprofil.
+
+- l) Nimm die **mittlere Zeile** des Bildes heraus: `profil = bild[zeilen // 2, :]`. Das ist eine ganz normale Liste von Höhenwerten.
+- m) Zeichne dieses Profil in ein **zweites Diagramm** unter das Höhenbild (zwei Diagramme in einem Fenster kennst Du aus Aufgabe 3).
+- n) Zeichne in das Höhenbild eine **waagerechte Linie** dort ein, wo Du geschnitten hast — damit man sieht, woher das Profil stammt: `ax.axhline(zeilen // 2, color="red", linestyle="--")`.
+- o) Erkennst Du im Profil die Form des Skateboards wieder? Wo sind die Achsen (die Rollenhalterungen)?
+
+### Teil 4: Kanten erkennen
+
+Eine Kante ist eine Stelle, an der sich die Höhe **plötzlich stark ändert**. Mathematisch: eine große Steigung. Genau das rechnet `np.gradient` aus — für jeden Bildpunkt, wie stark sich der Wert zum Nachbarn hin ändert.
+
+- p) Berechne das Kantenbild: `kante = np.abs(np.gradient(bild, axis=1))`. Das `np.abs` macht alle Werte positiv — ob es bergauf oder bergab geht, ist für eine Kante egal.
+- q) Zeige das Kantenbild in einem dritten Diagramm an, am besten in Graustufen (`cmap="gray"`). Helle Stellen sind Kanten.
+- r) Probiere `axis=0` statt `axis=1`. Welche Kanten findest Du dann, und welche verschwinden? Erkläre Dir selbst, warum.
+- s) Entscheide Dich für eine **Schwelle**: alles über einem bestimmten Wert gilt als Kante, alles darunter nicht. `kante > 0.002` gibt Dir ein Bild aus lauter Ja/Nein-Werten. Spiele mit der Zahl — wird sie zu klein, ist alles Kante; wird sie zu groß, findest Du nichts mehr.
+- t) Zeichne zum Schluss **senkrechte Linien** (`ax.axvline(...)`) dort ins Höhenbild, wo Du die beiden Achsen des Skateboards vermutest.
+
+> **Das ist der Kern jeder Fehlererkennung:** Ein Computer "sieht" keinen Kratzer und keine schlechte Schweißnaht. Er rechnet nur aus, wo sich etwas stärker ändert als erwartet — und vergleicht das mit einer Schwelle. Die Kunst steckt darin, die richtige Schwelle zu finden.
+
+### Zum Nachschlagen
+
+- [Bilder anzeigen (imshow)](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.imshow.html)
+- [Farbskala (colorbar)](https://matplotlib.org/stable/api/figure_api.html#matplotlib.figure.Figure.colorbar)
+- [Hilfslinien (axhline / axvline)](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.axhline.html)
+- [numpy: reshape](https://numpy.org/doc/stable/reference/generated/numpy.reshape.html)
+- [numpy: gradient](https://numpy.org/doc/stable/reference/generated/numpy.gradient.html)
+
+**Tipp:** Arbeite die vier Teile nacheinander ab und mache nach jedem einen Screenshot. Wenn Teil 1 nicht stimmt, ist alles Weitere wertlos — das Bild muss *vorher* richtig aussehen, bevor Du anfängst, darin zu suchen.
+
+### Bonus
+
+- u) Lass dasselbe Programm auf `Data/AluminiumNaht.obj` laufen. Die Naht ist viel flacher als das Skateboard — Du wirst die Farbskala anpassen müssen, sonst siehst Du nichts. Im Kantenbild ist eine auffällige Stelle zu finden. Markiere sie mit einem Punkt. Was könnte das sein?
+- v) Schreibe das Einlesen als **Funktion** `lade_hoehenbild(dateiname)`, die das fertige Bild zurückgibt. Dann kannst Du die Scans wechseln, ohne jedes Mal den Code umzubauen.
+
+### Deine Lösung:
+
+
+
+### Feedback
+
